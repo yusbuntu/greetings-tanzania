@@ -1,0 +1,39 @@
+# Build Stage
+
+# Use the official Golang 1.18 image as the base image and name it 'builder'
+FROM golang:1.18 AS builder
+
+# Set the working directory in the container to '/app'
+WORKDIR /app
+
+# Copy the 'go.mod' file from the current directory into the container at './'
+COPY go.mod ./
+
+# Download the dependencies specified in 'go.mod'
+RUN go mod download
+
+# Copy the rest of the application code into the container at './'
+COPY . .
+
+# Build the Go application and output the binary to 'greetings-app'
+RUN go build -o greetings-app
+
+# Start the Run Stage
+
+# Use the Debian Buster Slim image as the base image for the final stage
+FROM debian:buster-slim
+
+# Set the working directory in the container to '/app'
+WORKDIR /app
+
+# Copy the 'greetings-app' binary from the 'builder' stage into the current stage at '/app/greetings-app'
+COPY --from=builder /app/greetings-app /app/greetings-app
+
+# Copy the 'static' directory from the current directory into the container at '/app/static'
+COPY static /app/static
+
+# Expose port 8080 to the host machine
+EXPOSE 8080
+
+# Set the default command to run the 'greetings-app' binary when the container starts
+CMD ["./greetings-app"]

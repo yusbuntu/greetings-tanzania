@@ -1,0 +1,49 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: url('Kilimanjaro1.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.container {
+    text-align: center;
+    color: white;
+}
+
+#greeting {
+    font-size: 3.5em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    font-style: italic;
+    animation: color-change 14s infinite;
+}
+
+@keyframes color-change {
+    0% { color: red; }
+    14% { color: orange; }
+    28% { color: yellow; }
+    42% { color: green; }
+    57% { color: blue; }
+    71% { color: lime; }
+    85% { color: purple; }
+    100% { color: gold; }
+}
+
+footer {
+  background-color: lime;
+  color: white;
+  padding: 0.5em 0;
+  font-weight: bold;
+  font-style: italic;
+  font-size: 14px;
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  text-align: center;
+}
+
